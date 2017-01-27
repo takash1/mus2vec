@@ -15,13 +15,11 @@ def KLDiv(mu1, S1, mu2, S2):
     try:
         invS1 = np.linalg.inv(S1)
     except numpy.linalg.linalg.LinAlgError:
-        # raise
-        return 0
+        return -1
     try:
         invS2 = np.linalg.inv(S2)
     except numpy.linalg.linalg.LinAlgError:
-        # raise
-        return 0
+        return -1
 
     # KL Divergenceを計算
     t1 = np.sum(np.diag(np.dot(invS2, S1)))
@@ -115,6 +113,9 @@ def similar_list(target, nceps):
             if fname == target:
                 continue
             emd = calcEMD(target, fname, nceps)
+            if emd < 0:
+                print 'raise negative value'
+                continue
             emd_list.append([g, i, emd])
     return sorted(emd_list, key=lambda x: x[2])
 
