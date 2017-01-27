@@ -28,10 +28,10 @@ class ConvAE(Chain):
     def __call__(self, x, layer):
         return F.mean_squared_error(self.fwd(x, layer), x)
 
-    def fwd(self, x, layer=5):
+    def fwd(self, x, layer):
         return self.decode(self.encode(x, layer), layer)
 
-    def encode(self, x, layer):
+    def encode(self, x, layer=5):
         e = F.relu(self.enc1(x))
         if layer == 1:
             return e
