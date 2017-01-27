@@ -1,7 +1,7 @@
 # coding:utf-8
 '''
 mfcc_to_signature.py
-usage: python mfcc_to_signature.py [mfccdir] [sigdir]
+usage: python mfcc_to_signature.py [nceps] [nk]
 各曲のMFCCをシグネチャに変換する
 '''
 
@@ -21,11 +21,8 @@ def vq(mfcc, k):
 
 
 if __name__ == "__main__":
-    # if len(sys.argv) != 3:
-        # print "usage: python mfcc_to_signature.py [mfccdir] [sigdir]"
-        # sys.exit()
-
     nceps = int(sys.argv[1])
+    nk = int(sys.argv[2])
     mfccDir = "gtzan"
     sigDir = "sig"
 
@@ -39,18 +36,19 @@ if __name__ == "__main__":
         for i in range(100):
             mfccFile = os.path.join(mfccDir, g,
                                     g + ".%05d_%d.ceps.npy" % (i, nceps))
-            sigFile = os.path.join(sigDir, g + ".%05d_%d.sig" % (i, nceps))
+            sigFile = os.path.join(sigDir,
+                                   g + ".%05d_%d_%d.sig" % (i, nceps, nk))
             print mfccFile, "=>", sigFile
             fout = open(sigFile, "w")
             ceps = np.load(mfccFile)
             ceps = ceps[1000:4000, :]
 
             # MFCCをベクトル量子化してコードを求める
-            code = vq(ceps, 16)
+            code = vq(ceps, nk)
 
             # 各クラスタのデータ数、平均ベクトル、
             # 共分散行列を求めてシグネチャとする
-            for k in range(16):
+            for k in range(nk):
                 # クラスタkのフレームのみ抽出
                 frames = np.array([ceps[j] for j in range(len(ceps))
                                   if code[j] == k])
@@ -61,7 +59,8 @@ if __name__ == "__main__":
                 # 重み（各クラスタのデータ数）
                 w = len(frames)
                 # このクラスタの特徴量をフラット形式で出力
-                # 1行が重み1個、平均ベクトル20個、分散・共分散行列400個の計421個の数値列
+                # 1行が重み1個
+                # 平均ベクトルnceps個、分散・共分散行列nceps*nceps個の計421個の数値列
                 features = np.hstack((w, m, sigma.flatten()))
                 features = [str(x) for x in features]
                 fout.write(" ".join(features) + "\n")
