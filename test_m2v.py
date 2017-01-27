@@ -10,7 +10,7 @@ genres = ['blues', 'classical', 'country', 'disco', 'hiphop',
           'jazz', 'metal', 'pop', 'reggae', 'rock']
 dirname = os.path.join("mus2vecs", "mus2vec_%d_%d" % (nceps, dim))
 
-sup = 20
+sup = 100
 # hit = 0
 tot = 0
 ave_precision = 0
