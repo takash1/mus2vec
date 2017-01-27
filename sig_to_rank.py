@@ -5,8 +5,6 @@ import pandas as pd
 import pyper as pr
 import os
 import sys
-from collections import defaultdict
-import time
 
 
 def KLDiv(mu1, S1, mu2, S2):
@@ -87,7 +85,7 @@ def calcEMD(sigFile1, sigFile2, nceps):
     r.assign('col_rhs', col_rhs)
 
     # R上で輸送問題を解く
-    r("t <- lp.transport(costs, 'min', \
+    r("t <- lp.transport(costs, 'min',\
                          row_signs, row_rhs, col_signs, col_rhs)")
 
     # R上で最適な輸送量を取得
@@ -103,13 +101,13 @@ def calcEMD(sigFile1, sigFile2, nceps):
     return emd
 
 
-def similar_list(target, nceps):
+def similar_list(target, nceps, nk):
     genres = ['blues', 'classical', 'country', 'disco', 'hiphop',
               'jazz', 'metal', 'pop', 'reggae', 'rock']
     emd_list = []
     for g in genres:
         for i in range(100):
-            fname = os.path.join('sig', g + ".%05d_%d.sig" % (i, nceps))
+            fname = os.path.join('sig', g + ".%05d_%d_%d.sig" % (i, nceps, nk))
             if fname == target:
                 continue
             emd = calcEMD(target, fname, nceps)
@@ -126,6 +124,7 @@ def main():
     genre = args[1]
     number = int(args[2])
     nceps = int(args[3])
+    nk = int(args[4])
     if len(args) > 5:
         sup = int(args[5])
     else:
@@ -133,9 +132,10 @@ def main():
 
     # Load data
     dirname = 'sig'
-    fin = os.path.join(dirname, genre + ".%05d_%d.sig" % (number, nceps))
+    fin = os.path.join(dirname,
+                       genre + ".%05d_%d_%d.sig" % (number, nceps, nk))
 
-    emd_list = similar_list(fin, nceps)
+    emd_list = similar_list(fin, nceps, nk)
 
     # Display
     print "input : ", genre, "%05d" % number
