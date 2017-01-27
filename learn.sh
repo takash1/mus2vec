@@ -11,9 +11,9 @@ echo '\nmfcc20 ae300'
 python learn_ae.py 20 300 g
 echo '\nmfcc20 ae500'
 python learn_ae.py 20 500 g
-echo '\nmfcc39 ae100'
-python learn_ae.py 39 100 g
-echo '\nmfcc39 ae300'
-python learn_ae.py 39 300 g
-echo '\nmfcc39 ae500'
-python learn_ae.py 39 500 g
+echo '\nmfcc30 ae100'
+python learn_ae.py 30 100 g
+echo '\nmfcc30 ae300'
+python learn_ae.py 30 300 g
+echo '\nmfcc30 ae500'
+python learn_ae.py 30 500 g

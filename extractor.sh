@@ -11,9 +11,9 @@ echo 'mfcc20 ae300'
 python encoder.py 20 300
 echo 'mfcc20 ae500'
 python encoder.py 20 500
-echo 'mfcc39 ae100'
-python encoder.py 39 100
-echo 'mfcc39 ae300'
-python encoder.py 39 300
-echo 'mfcc39 ae500'
-python encoder.py 39 500
+echo 'mfcc30 ae100'
+python encoder.py 30 100
+echo 'mfcc30 ae300'
+python encoder.py 30 300
+echo 'mfcc30 ae500'
+python encoder.py 30 500
