@@ -46,19 +46,27 @@ def main():
     mfcc_list = similar_list(fin, nceps)
 
     # Display
-    # Display
     print "input: ", genre, "%05d" % number
     print "-" * 30
     hit = 0
+    ap = 0
     for i in range(sup):
         print "%s\t%05d\t%.6f" % (mfcc_list[i][0],
                                   mfcc_list[i][1],
                                   mfcc_list[i][2])
         if genre in mfcc_list[i]:
             hit += 1
+            ap += hit / float(i + 1)
+
+    # Average Precision
+    if hit == 0:
+        ap = 0
+    else:
+        ap /= float(hit)
 
     print "-" * 30
-    print genre, ": %d/%d" % (hit, sup)
+    # print genre, ": %d/%d" % (hit, sup)   # Precision@sup
+    print genre, "AP@%d : %f" % (sup, ap)  # Average Precision@sup
 
 
 if __name__ == '__main__':
