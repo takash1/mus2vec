@@ -56,7 +56,7 @@ usage: ```$ python learn_ae.py [ncpes] [dim] [g]```
 - 出力: ```models/CAE_[nceps]_[dim].model```
 
 ## learn.sh
-- mfcc[13, 20, 39], ae[100, 300, 500]の学習を実行する(learn_ae.py)
+- mfcc[13, 20, 30], ae[100, 300, 500]の学習を実行する(learn_ae.py)
 - GPU使用
 
 ## encoder.py
@@ -68,30 +68,58 @@ usage: ```$ python encoder.py [nceps] [dim]```
 - 出力: ```mus2vecs/mus2vec_[ncpes]_[dim]/[genre]/[genre].[num].npy```
 
 ## extractor.sh
-- mfcc[13, 20, 39], ae[100, 300, 500]のベクトル化を実行する(encoder.py)
+- mfcc[13, 20, 30], ae[100, 300, 500]のベクトル化を実行する(encoder.py)
 
 ## mus2vec.py
-usage: ```$ python mus2vec.py [genre] [number] [nceps] [dim] [out]```
+usage: ```$ python mus2vec.py [genre] [number] [nceps] [dim] [sup]```
 - [genre] [number] の楽曲の類似度が高い曲を上位[out]個を列挙する
 - mfcc次元数[nceps]， Autoencoder次元数[dim]のモデルでの類似度を出す
-- 同ジャンルの含有数を表示する
+- 同ジャンルの平均適合率を表示する
 
 ## mfcc_cos.py
-usage: ```$ python mfcc_cos.py [genre] [number] [nceps] [out]```
+usage: ```$ python mfcc_cos.py [genre] [number] [nceps] [sup]```
 - [genre] [number] の楽曲の類似度が高い曲を上位[out]個を列挙する
 - mfcc次元数[nceps]の単純なCosine類似度を出す
-- 同ジャンルの含有数を表示する
+- 同ジャンルの平均適合率を表示する
+
+## mfccAve_cos.py
+usage: ```$ python mfccAve_cos.py [genre] [number] [nceps] [sup]```
+- [genre] [number] の楽曲の類似度が高い曲を上位[out]個を列挙する
+- mfcc次元数[nceps]の平均のCosine類似度を出す
+- 同ジャンルの平均適合率を表示する
 
 ## test_m2v.py
 usage: ```$ python test_m2v.py [nceps] [dim]```
-- music2vecの正解率を出す
+- music2vecの平均適合率を出す
 
 ## m2vtest.sh
-- mfcc[13, 20, 39], ae[100, 300, 500]のテストを行う(test_m2v.py)
+- mfcc[13, 20, 30], ae[100, 300, 500]のテストを行う(test_m2v.py)
 
 ## test_mfcc.py
 usage: ```$ python test_mfcc.py [nceps]```
-- mfcc_cosの正解率を出す
+- mfcc_cosの平均適合率を出す
 
 ## mfcctest.sh
-- mfcc[13, 20, 39], ae[100, 300, 500]のテストを行う(test_mfcc.py)
+- mfcc[13, 20, 30], ae[100, 300, 500]のテストを行う(test_mfcc.py)
+
+## test_mfccAve.py
+usage: ```$ python test_mfccAve.py [nceps]```
+- mfccAve_cosの平均適合率を出す
+
+## mfccAvetest.sh
+- mfcc[13, 20, 30], ae[100, 300, 500]のテストを行う(test_mfccAve.py)
+
+## mfcc_to_sig.py
+usage: ```$ python mfcc_to_signature.py [nceps] [nk]```
+- 各曲のMFCCをシグネチャに変換する
+
+## sig_to_rank.py
+usage: ```$ python sig_to_rank.py [genre] [number] [nceps] [sup]```
+- EMDを計算する
+
+## test_emd.py
+usage: ```$ python test_emd.py [nceps] [nk]```
+- EMDの平均適合率を出す
+
+## emdtest.sh
+- mfcc[13, 20, 30], k-means[16, 30, 50]のテストを行う
