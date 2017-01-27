@@ -52,7 +52,7 @@ elif nceps == 30:
         model = models.cae_30_100.ConvAE()
         serializers.load_npz('models/CAE_30_100.model', model)
     elif dim == 300:
-        import models.cae_emd30_300
+        import models.cae_30_300
         model = models.cae_30_300.ConvAE()
         serializers.load_npz('models/CAE_30_300.model', model)
     elif dim == 500:
