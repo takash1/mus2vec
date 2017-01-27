@@ -40,7 +40,7 @@ class ConvAE(Chain):
         return e5
 
     def decode(self, x):
-        d5 = F.relu(self.dec4(x))
+        d5 = F.relu(self.dec5(x))
         d4 = F.relu(self.dec4(d5))
         d3 = F.relu(self.dec3(d4))
         d2 = F.relu(self.dec2(d3))
