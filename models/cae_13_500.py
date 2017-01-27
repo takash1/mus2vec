@@ -14,7 +14,7 @@ class ConvAE(Chain):
     def __init__(self):
         super(ConvAE, self).__init__(
             enc1=L.Convolution2D(1, 100, (1, NCEPS)),
-            enc2=L.Convolution2D(100, 50, (1, NCEPS)),
+            enc2=L.Convolution2D(100, 50, (1, 1)),
             enc3=L.Convolution2D(50, 10, (1, 1)),
             enc4=L.Convolution2D(10, 1000, (3000, 1)),
             enc5=L.Convolution2D(1000, DIM, (1, 1)),
