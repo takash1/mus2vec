@@ -49,14 +49,14 @@ elif nceps == 20:
         sys.exit(1)
 elif nceps == 30:
     if dim == 100:
-        import models.cae_39_100
-        model = models.cae_39_100.ConvAE()
+        import models.cae_30_100
+        model = models.cae_30_100.ConvAE()
     elif dim == 300:
-        import models.cae_39_300
-        model = models.cae_39_300.ConvAE()
+        import models.cae_30_300
+        model = models.cae_30_300.ConvAE()
     elif dim == 500:
-        import models.cae_39_500
-        model = models.cae_39_500.ConvAE()
+        import models.cae_30_500
+        model = models.cae_30_500.ConvAE()
     else:
         print 'Argument(dim) Error'
         sys.exit(1)

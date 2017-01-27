@@ -48,17 +48,17 @@ elif nceps == 20:
         sys.exit(1)
 elif nceps == 30:
     if dim == 100:
-        import models.cae_39_100
-        model = models.cae_39_100.ConvAE()
-        serializers.load_npz('models/CAE_39_100.model', model)
+        import models.cae_30_100
+        model = models.cae_30_100.ConvAE()
+        serializers.load_npz('models/CAE_30_100.model', model)
     elif dim == 300:
-        import models.cae_39_300
-        model = models.cae_39_300.ConvAE()
-        serializers.load_npz('models/CAE_39_300.model', model)
+        import models.cae_emd30_300
+        model = models.cae_30_300.ConvAE()
+        serializers.load_npz('models/CAE_30_300.model', model)
     elif dim == 500:
-        import models.cae_39_500
-        model = models.cae_39_500.ConvAE()
-        serializers.load_npz('models/CAE_39_500.model', model)
+        import models.cae_30_500
+        model = models.cae_30_500.ConvAE()
+        serializers.load_npz('models/CAE_30_500.model', model)
     else:
         print 'Argument(dim) Error'
         sys.exit(1)
