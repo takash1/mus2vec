@@ -30,4 +30,4 @@ for g in genres:
         tot += 1
         ave_precision += ap
 
-print "AP@ : %f (total : %d)" % (ave_precision / float(tot), tot)
+print "AP : %f (total : %d)" % (ave_precision / float(tot), tot)
