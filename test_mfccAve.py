@@ -19,7 +19,7 @@ for g in genres:
         for j in range(len(mfcc_list)):
             if g in mfcc_list[j]:
                 hit += 1
-                ap += hit / float(i + 1)
+                ap += hit / float(j + 1)
             if hit == 100:
                 break
         if hit == 0:
@@ -29,4 +29,4 @@ for g in genres:
         tot += 1
         ave_precision += ap
 
-print "AP@%d : %f (total : %d)" % (sup, ave_precision / float(tot), tot)
+print "AP : %f (total : %d)" % (ave_precision / float(tot), tot)
