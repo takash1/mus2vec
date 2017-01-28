@@ -4,6 +4,7 @@ import sig_to_rank
 
 args = sys.argv
 nceps = int(args[1])
+nk = int(args[2])
 
 genres = ['blues', 'classical', 'country', 'disco', 'hiphop',
           'jazz', 'metal', 'pop', 'reggae', 'rock']
@@ -13,8 +14,8 @@ tot = 0
 ave_precision = 0
 for g in genres:
     for i in range(10):
-        fin = os.path.join(dirname, g + ".%05d_%d.sig" % (i, nceps))
-        emd_list = sig_to_rank.similar_list(fin, nceps)
+        fin = os.path.join(dirname, g + ".%05d_%d_%d.sig" % (i, nceps, nk))
+        emd_list = sig_to_rank.similar_list(fin, nceps, nk)
         hit = 0
         ap = 0
         for j in range(len(emd_list)):
