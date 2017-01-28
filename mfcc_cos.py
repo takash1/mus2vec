@@ -16,7 +16,7 @@ def similar_list(target, nceps):
               'jazz', 'metal', 'pop', 'reggae', 'rock']
     mfcc_list = []
     for g in genres:
-        for i in range(100):
+        for i in range(10):
             fname = os.path.join('gtzan', g,
                                  g + ".%05d_%d.ceps.npy" % (i, nceps))
             if fname == target:

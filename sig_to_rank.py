@@ -106,7 +106,7 @@ def similar_list(target, nceps, nk):
               'jazz', 'metal', 'pop', 'reggae', 'rock']
     emd_list = []
     for g in genres:
-        for i in range(100):
+        for i in range(10):
             fname = os.path.join('sig', g + ".%05d_%d_%d.sig" % (i, nceps, nk))
             if fname == target:
                 continue

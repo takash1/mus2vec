@@ -33,7 +33,7 @@ if __name__ == "__main__":
               'jazz', 'metal', 'pop', 'reggae', 'rock']
 
     for g in genres:
-        for i in range(100):
+        for i in range(10):
             mfccFile = os.path.join(mfccDir, g,
                                     g + ".%05d_%d.ceps.npy" % (i, nceps))
             sigFile = os.path.join(sigDir,

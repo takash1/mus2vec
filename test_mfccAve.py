@@ -11,7 +11,7 @@ genres = ['blues', 'classical', 'country', 'disco', 'hiphop',
 tot = 0
 ave_precision = 0
 for g in genres:
-    for i in range(100):
+    for i in range(10):
         fin = os.path.join('gtzan', g, g + ".%05d_%d.ceps.npy" % (i, nceps))
         mfcc_list = mfccAve_cos.similar_list(fin, nceps)
         hit = 0
@@ -20,7 +20,7 @@ for g in genres:
             if g in mfcc_list[j]:
                 hit += 1
                 ap += hit / float(j + 1)
-            if hit == 100:
+            if hit == 10:
                 break
         if hit == 0:
             ap = 0

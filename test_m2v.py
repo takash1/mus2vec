@@ -13,7 +13,7 @@ dirname = os.path.join("mus2vecs", "mus2vec_%d_%d" % (nceps, dim))
 tot = 0
 ave_precision = 0
 for g in genres:
-    for i in range(100):
+    for i in range(10):
         fin = os.path.join(dirname, g, g + ".%05d.npy" % i)
         mus2vec_list = mus2vec.similar_list(fin, dirname)
         hit = 0
@@ -22,7 +22,7 @@ for g in genres:
             if g in mus2vec_list[j]:
                 hit += 1
                 ap += hit / float(j + 1)
-            if hit == 100:
+            if hit == 10:
                 break
         if hit == 0:
             ap = 0

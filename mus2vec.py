@@ -15,7 +15,7 @@ def similar_list(target, dirname):
               'jazz', 'metal', 'pop', 'reggae', 'rock']
     mus2vec_list = []
     for g in genres:
-        for i in range(100):
+        for i in range(10):
             fname = os.path.join(dirname, g, g + ".%05d.npy" % i)
             if fname == target:
                 continue

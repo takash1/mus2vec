@@ -73,7 +73,7 @@ genres = ['blues', 'classical', 'country', 'disco', 'hiphop',
 dir_in = 'gtzan'
 v = []
 for g in genres:
-    for i in range(100):
+    for i in range(10):
         fname = os.path.join(dir_in, g, g + ".%05d_%d.ceps.npy" % (i, nceps))
         ceps = np.load(fname)
         v.append(ceps[1000:4000, :])

@@ -72,7 +72,7 @@ dirname = 'gtzan'
 v = []
 
 for g in genres:
-    for i in range(100):
+    for i in range(10, 100):
         fname = os.path.join(dirname, g, g + ".%05d_%d.ceps.npy" % (i, nceps))
         ceps = np.load(fname)
         v.append(ceps[1000:4000, :])
