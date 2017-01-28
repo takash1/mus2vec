@@ -15,10 +15,10 @@ class ConvAE(Chain):
         super(ConvAE, self).__init__(
             enc1=L.Convolution2D(1, 50, (7, NCEPS), stride=2, pad=(3, 0)),
             enc2=L.Convolution2D(50, 50, (5, 1), stride=2, pad=(2, 0)),
-            enc3=L.Convolution2D(50, 1, (3, 1), pad=(1, 0)),
-            enc4=L.Convolution2D(1, DIM, (750, 1)),
-            dec4=L.Deconvolution2D(DIM, 1, (750, 1)),
-            dec3=L.Deconvolution2D(1, 50, (3, 1), pad=(1, 0)),
+            enc3=L.Convolution2D(50, 10, (3, 1), pad=(1, 0)),
+            enc4=L.Convolution2D(10, DIM, (750, 1)),
+            dec4=L.Deconvolution2D(DIM, 10, (750, 1)),
+            dec3=L.Deconvolution2D(10, 50, (3, 1), pad=(1, 0)),
             dec2=L.Deconvolution2D(50, 50, (4, 1), stride=2, pad=(1, 0)),
             dec1=L.Deconvolution2D(50, 1, (6, NCEPS), stride=2, pad=(2, 0))
         )
