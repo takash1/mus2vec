@@ -110,7 +110,7 @@ usage: ```$ python test_mfccAve.py [nceps]```
 - mfcc[13, 20, 30], ae[100, 300, 500]のテストを行う(test_mfccAve.py)
 
 ## mfcc_to_sig.py
-usage: ```$ python mfcc_to_signature.py [nceps] [nk]```
+usage: ```$ python mfcc_to_sig.py [nceps] [nk]```
 - 各曲のMFCCをシグネチャに変換する
 
 ## sig_to_rank.py
