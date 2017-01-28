@@ -13,25 +13,24 @@ DIM = 300
 class ConvAE(Chain):
     def __init__(self):
         super(ConvAE, self).__init__(
-            enc1=L.Convolution2D(1, 100, (1, NCEPS)),
-            enc2=L.Convolution2D(100, 50, (1, 1)),
-            enc3=L.Convolution2D(50, 10, (1, 1)),
-            enc4=L.Convolution2D(10, 1000, (3000, 1)),
-            enc5=L.Convolution2D(1000, DIM, (1, 1)),
-            dec5=L.Deconvolution2D(DIM, 1000, (1, 1)),
-            dec4=L.Deconvolution2D(1000, 10, (3000, 1)),
-            dec3=L.Deconvolution2D(10, 50, (1, 1)),
-            dec2=L.Deconvolution2D(50, 100, (1, 1)),
-            dec1=L.Deconvolution2D(100, 1, (1, NCEPS))
+            enc1=L.Convolution2D(1, 50, (7, NCEPS), stride=2, pad=(3, 0)),
+            enc2=L.Convolution2D(50, 50, (5, 1), stride=2, pad=(2, 0)),
+            enc3=L.Convolution2D(50, 1, (3, 1), pad=(1, 0)),
+            enc4=L.Convolution2D(1, DIM, (750, 1)),
+            dec4=L.Deconvolution2D(DIM, 1, (750, 1)),
+            dec3=L.Deconvolution2D(1, 50, (3, 1), pad=(1, 0)),
+            dec2=L.Deconvolution2D(50, 50, (4, 1), stride=2, pad=(1, 0)),
+            dec1=L.Deconvolution2D(50, 1, (6, NCEPS), stride=2, pad=(2, 0))
         )
 
-    def __call__(self, x, layer):
-        return F.mean_squared_error(self.fwd(x, layer), x)
+    def __call__(self, x, layer, train):
+        return F.mean_squared_error(self.fwd(x, layer, train), x)
 
-    def fwd(self, x, layer):
-        return self.decode(self.encode(x, layer), layer)
+    def fwd(self, x, layer, train):
+        return self.decode(self.encode(x, layer, train), layer)
 
-    def encode(self, x, layer=5):
+    def encode(self, x, layer=4, train=False):
+        x = F.dropout(x, ratio=0.1, train=train)
         e = F.relu(self.enc1(x))
         if layer == 1:
             return e
@@ -44,14 +43,9 @@ class ConvAE(Chain):
         e = F.relu(self.enc4(e))
         if layer == 4:
             return e
-        e = F.relu(self.enc5(e))
-        if layer == 5:
-            return e
 
     def decode(self, x, layer):
-        if layer == 5:
-            x = F.relu(self.dec5(x))
-        if layer >= 4:
+        if layer == 4:
             x = F.relu(self.dec4(x))
         if layer >= 3:
             x = F.relu(self.dec3(x))

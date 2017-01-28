@@ -101,7 +101,7 @@ for j in range(epoch):
     for i in range(0, n, bs):
         x = Variable(xtrain[sffindx[i:(i+bs) if (i+bs) < n else n]])
         model.zerograds()
-        loss = model(x, j / 20 + 1)
+        loss = model(x, layer=(j/25+1), train=True)
         loss.backward()
         optimizer.update()
     print j+1, "\t", loss.data
